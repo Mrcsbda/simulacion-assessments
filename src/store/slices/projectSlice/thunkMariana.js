@@ -1,5 +1,5 @@
 import { projectsApi } from "../../../api/projectsApi"
-import { checking, isNotChecking } from "./projectSlice"
+import { checking, deleteProject, isNotChecking } from "./projectSlice"
 
 export const addUser = (email) => {
     return async (dispatch) => {
@@ -29,7 +29,7 @@ export const addUser = (email) => {
     }
 }
 
-export const deleteProject = (postId) => {
+export const deleteProjectThunk = (postId) => {
     return async (dispatch) => {
         try {
             dispatch(deleteProject(postId));

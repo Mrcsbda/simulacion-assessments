@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
+import { deleteProjectThunk } from '../../store/slices/projectSlice/thunkMariana'
 
 const DeleteProject = ({ setDeleteProject, projectId }) => {
     const { isLoading, userInfo } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const dispatch = useDispatch()
 
-    const deleteProject = async () => {
-        dispatch(deleteProject(projectId))
+    const deleteProject = () => {
+        dispatch(deleteProjectThunk(projectId))
+        setDeleteProject(false)
     }
 
     const closeModal = () => {
