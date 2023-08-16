@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { editTask } from '../../SwalsEdit/editProject'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTaskThunk } from '../../../store/slices/projectSlice/thunkJose'
-
+import { patchProject } from '../../../store/slices/projectSlice/thunkSebastian'
 const Tasks = ({ tasks, project, projectId, userId }) => {
   const [tasksArray, setTasksArray] = useState(false)
   const [repeatProcess, setRepeatProcess] = useState(false)
