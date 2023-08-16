@@ -4,6 +4,8 @@ import { updateProjects } from "../../store/slices/projectSlice/projectSlice"
 import Tasks from '../../components/projects/task/Tasks'
 import "./Layout.scss"
 import Loader from '../../components/loader/Loader'
+import { editProject } from '../../components/SwalsEdit/editProject'
+import { patchProject } from '../../store/slices/projectSlice/thunkSebastian'
 
 
 const Layout = () => {
@@ -27,9 +29,12 @@ const Layout = () => {
       [projectId]: false,
     }));
   };
+  const handleEditProject = async (project, userId)=> {
+   const newProject = await editProject(project)
+    dispatch(patchProject(project.id, newProject, userId))
+  }
 
-
-
+  
 
   return (
     <>
@@ -59,18 +64,18 @@ const Layout = () => {
                           <input type="checkbox" checked={project.completed} onChange={() => { }} />
                           <h2>{project.title}</h2>
                           <img className="Layout__icons-task" src="/images/add-project.svg" alt="" />
-                          <img className="Layout__icons-task" src="/images/edit.svg" alt="" />
+                          <img onClick={()=> handleEditProject(project, userInfo.id)} className="Layout__icons-task" src="/images/edit.svg" alt="edit.svg" />
                           <img className="Layout__icons-task" src="/images/delete.svg" alt="" />
 
 
                           {
                             openProject[project.id] ?
-                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
+                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id, userInfo.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
                               :
                               <figure className='arrow_down' onClick={() => handleOpenProjects(project.id)}><img src="/images/arrow_down.svg" alt="arrowDown" /></figure>}
                         </div>
                         {openProject[project.id] &&
-                          <Tasks tasks={project.tasks} />}
+                          <Tasks tasks={project.tasks} project={project} userId={userInfo.id}/>}
                       </li>
                     ))}
                   </ul>

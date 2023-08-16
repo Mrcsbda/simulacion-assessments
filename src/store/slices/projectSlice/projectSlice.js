@@ -31,6 +31,7 @@ export const projectSlice = createSlice({
             state = initialState
         },
         updateProjects: (state, action) => {
+            state.isLoading = false,
             state.projects = action.payload.projects
         },
         getUser: (state, action) => {
