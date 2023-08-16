@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import "./addUser.scss"
-import { addUser } from '../../store/slices/projectSlice/thunkMariana'
+import { addUserThunk } from '../../store/slices/projectSlice/thunkMariana'
 
 const AddUser = ({ setNewUser, projectId }) => {
 
-    const { isLoading, userInfo } = useSelector(state => state.projects)
+    const { projects } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const [rightInformation, setRightInformation] = useState(true)
     const dispatch = useDispatch()
 
     const onSubmit = async (data) => {
-        const validation = await dispatch(addUser(data.email))
+        const validation = await dispatch(addUserThunk(data.email, projectId, projects))
         if(validation) {
             setRightInformation(true)
             setNewUser(false)

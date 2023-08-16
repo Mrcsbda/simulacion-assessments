@@ -1,25 +1,27 @@
 import { projectsApi } from "../../../api/projectsApi"
-import { checking, deleteProject, isNotChecking } from "./projectSlice"
+import { addUser, deleteProject } from "./projectSlice"
 
-export const addUser = (email) => {
+export const addUserThunk = (email, projectId, projects) => {
     return async (dispatch) => {
         try {
-
             const userData = await projectsApi.get(`users?email=${email}`)
             const [userInfo] = userData.data
-            console.log(userInfo)
 
-            // const projectsData = await projectsApi.get(`Projects`)
-            // const projectsInfo = projectsData.data
+            const info = {
+                userId: userInfo.id,
+                projectId
+            }
 
-            // const projects = projectsInfo.filter((project) => (
-            //     project.usersId.includes(userInfo.id)
-            // ))
+            const findProject = projects.findIndex(project => project.id == projectId)
 
-            // const user = {
-            //     userInfo,
-            //     projects
-            // }
+            const usersId = [...projects[findProject].usersId, userInfo.id]
+            console.log(usersId)
+
+            await projectsApi.patch(`projects/${projectId}`, {
+                usersId: usersId
+            })
+            dispatch(addUser(info))
+
             return userInfo ? true : null
 
         } catch (error) {
@@ -29,10 +31,11 @@ export const addUser = (email) => {
     }
 }
 
-export const deleteProjectThunk = (postId) => {
+export const deleteProjectThunk = (projectId) => {
     return async (dispatch) => {
         try {
-            dispatch(deleteProject(postId));
+            // await projectsApi.delete(`projects/${projectId}`)
+            dispatch(deleteProject(projectId));
         } catch (error) {
             return null
         }
