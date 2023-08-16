@@ -4,6 +4,9 @@ import { updateProjects } from "../../store/slices/projectSlice/projectSlice"
 import Tasks from '../../components/projects/task/Tasks'
 import "./Layout.scss"
 import Loader from '../../components/loader/Loader'
+import AddUser from '../../components/addUser/AddUser'
+import AddProject from '../../components/addProject/AddProject'
+import DeleteProject from '../../components/deleteProject/DeleteProject'
 
 
 const Layout = () => {
@@ -11,6 +14,10 @@ const Layout = () => {
   const dispatch = useDispatch()
   const { isLoading, userInfo, projects } = useSelector(state => state.projects)
   const [openProject, setOpenProject] = useState({})
+  const [newUser, setNewUser] = useState(false)
+  const [newProject, setNewProject] = useState(false)
+  const [deleteProject, setDeleteProject] = useState(false)
+  const [projectId, setProjectId] = useState("")
 
   const handleUpdateProject = () => {
     dispatch(updateProjects())
@@ -28,8 +35,19 @@ const Layout = () => {
     }));
   };
 
+  const addNewUser = (id) => {
+    setNewUser(true)
+    setProjectId(id)
+  }
 
+  const addNewProject = () => {
+    setNewProject(true)
+  }
 
+  const deleteProjct = (id) => {
+    setDeleteProject(true)
+    setProjectId(id)
+  }
 
   return (
     <>
@@ -46,9 +64,7 @@ const Layout = () => {
                 <div className="Layout__container__top">
                   <h1 className="Layout__title" >{`Gestor de proyectos de ${userInfo.name}`}</h1>
                   <figure className="Layout__icons-container">
-                    <img className="Layout__icons" src="/images/add-project.svg" alt="" />
-                    <img className="Layout__icons" src="/images/add-user.svg" alt="" />
-
+                    <img className="Layout__icons" src="/images/add-project.svg" alt="" onClick={() => addNewProject()} />
                   </figure>
                 </div>
                 {
@@ -60,7 +76,8 @@ const Layout = () => {
                           <h2>{project.title}</h2>
                           <img className="Layout__icons-task" src="/images/add-project.svg" alt="" />
                           <img className="Layout__icons-task" src="/images/edit.svg" alt="" />
-                          <img className="Layout__icons-task" src="/images/delete.svg" alt="" />
+                          <img className="Layout__icons-task" src="/images/delete.svg" alt="" onClick={() => deleteProjct(project.id)} />
+                          <img className="Layout__icons-task" src="/images/add-user.svg" alt="" onClick={() => addNewUser(project.id)} />
 
 
                           {
@@ -76,6 +93,19 @@ const Layout = () => {
                   </ul>
                 }
               </section>
+              {
+                newUser && (
+                  <AddUser setNewUser={setNewUser} projectId={projectId} />
+                )
+              }
+              {
+                newProject && (
+                  <AddProject setNewProject={setNewProject} />
+                )
+              }
+              {deleteProject && (
+                <DeleteProject setDeleteProject={setDeleteProject} projectId={projectId}/>
+              )}
             </>
           )
         }
