@@ -7,6 +7,8 @@ import Loader from '../../components/loader/Loader'
 import AddUser from '../../components/addUser/AddUser'
 import AddProject from '../../components/addProject/AddProject'
 import DeleteProject from '../../components/deleteProject/DeleteProject'
+import { editProject } from '../../components/SwalsEdit/editProject'
+import { patchProject } from '../../store/slices/projectSlice/thunkSebastian'
 
 
 const Layout = () => {
@@ -34,6 +36,10 @@ const Layout = () => {
       [projectId]: false,
     }));
   };
+  const handleEditProject = async (project, userId)=> {
+   const newProject = await editProject(project)
+    dispatch(patchProject(project.id, newProject, userId))
+  }
 
   const addNewUser = (id) => {
     setNewUser(true)
@@ -48,6 +54,7 @@ const Layout = () => {
     setDeleteProject(true)
     setProjectId(id)
   }
+  
 
   return (
     <>
@@ -75,19 +82,18 @@ const Layout = () => {
                           <input type="checkbox" checked={project.completed} onChange={() => { }} />
                           <h2>{project.title}</h2>
                           <img className="Layout__icons-task" src="/images/add-project.svg" alt="" />
-                          <img className="Layout__icons-task" src="/images/edit.svg" alt="" />
                           <img className="Layout__icons-task" src="/images/delete.svg" alt="" onClick={() => deleteProjct(project.id)} />
                           <img className="Layout__icons-task" src="/images/add-user.svg" alt="" onClick={() => addNewUser(project.id)} />
-
+                          <img onClick={()=> handleEditProject(project, userInfo.id)} className="Layout__icons-task" src="/images/edit.svg" alt="edit.svg" />
 
                           {
                             openProject[project.id] ?
-                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
+                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id, userInfo.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
                               :
                               <figure className='arrow_down' onClick={() => handleOpenProjects(project.id)}><img src="/images/arrow_down.svg" alt="arrowDown" /></figure>}
                         </div>
                         {openProject[project.id] &&
-                          <Tasks tasks={project.tasks} projectId={project.id} />}
+                          <Tasks tasks={project.tasks} project={project} projectId={project.id} userId={userInfo.id}/>}
                       </li>
                     ))}
                   </ul>
