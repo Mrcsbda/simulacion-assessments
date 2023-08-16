@@ -13,6 +13,7 @@ const Layout = () => {
   const { isLoading, userInfo, projects } = useSelector(state => state.projects)
   const [openProject, setOpenProject] = useState({})
   const [newUser, setNewUser] = useState(false)
+  const [projectId, setProjectId] = useState("")
 
   const handleUpdateProject = () => {
     dispatch(updateProjects())
@@ -30,8 +31,9 @@ const Layout = () => {
     }));
   };
 
-  const addNewUser = () => {
+  const addNewUser = (id) => {
     setNewUser(true)
+    setProjectId(id)
   }
 
   return (
@@ -50,8 +52,6 @@ const Layout = () => {
                   <h1 className="Layout__title" >{`Gestor de proyectos de ${userInfo.name}`}</h1>
                   <figure className="Layout__icons-container">
                     <img className="Layout__icons" src="/images/add-project.svg" alt="" />
-                    <img className="Layout__icons" src="/images/add-user.svg" alt="" onClick={addNewUser}/>
-
                   </figure>
                 </div>
                 {
@@ -64,6 +64,7 @@ const Layout = () => {
                           <img className="Layout__icons-task" src="/images/add-project.svg" alt="" />
                           <img className="Layout__icons-task" src="/images/edit.svg" alt="" />
                           <img className="Layout__icons-task" src="/images/delete.svg" alt="" />
+                          <img className="Layout__icons-task" src="/images/add-user.svg" alt="" onClick={()=> addNewUser(project.id)}/>
 
 
                           {
@@ -81,7 +82,7 @@ const Layout = () => {
               </section>
               {
                 newUser && (
-                  <AddUser setNewUser={setNewUser}/>
+                  <AddUser setNewUser={setNewUser} projectId={projectId}/>
                 )
               }
             </>

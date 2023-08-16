@@ -3,15 +3,15 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import "./addUser.scss"
 
-const AddUser = ({ setNewUser }) => {
+const AddUser = ({ setNewUser , projectId }) => {
 
     const { isLoading, userInfo } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const [rightInformation, setRightInformation] = useState(true)
     const dispatch = useDispatch()
 
-    const onSubmit = () => {
-
+    const onSubmit = async (data) => {
+        console.log(projectId)
     }
 
     const closeModal = () => {
