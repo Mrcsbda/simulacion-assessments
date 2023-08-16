@@ -70,7 +70,7 @@ const Layout = () => {
                               <figure className='arrow_down' onClick={() => handleOpenProjects(project.id)}><img src="/images/arrow_down.svg" alt="arrowDown" /></figure>}
                         </div>
                         {openProject[project.id] &&
-                          <Tasks tasks={project.tasks} />}
+                          <Tasks tasks={project.tasks} projectId={project.id} />}
                       </li>
                     ))}
                   </ul>
