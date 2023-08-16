@@ -26,8 +26,16 @@
     flex-direction: column;
     list-style: none;
     padding: 50px;
+    gap: 10px;
     &__project{
-        
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+       & > div {
+        display: flex;
+        gap: 20px;
+       }
+
     }
     &__tasks{
         list-style: none;
@@ -36,7 +44,8 @@
     &__task{
         display: flex;
         align-items: center;
-        gap: 10px;
+        padding-left: 40px;
+        gap: 20px;
         & > input{
             height: 18px;
         }
@@ -45,6 +54,14 @@
  
 }
 
-
+.arrow_down{
+    height: calc(16px + 1vw);
+    width: calc(16px + 1vw);
+    cursor: pointer;
+    & > img {
+        width: 100%;
+        height: 100%;
+    }
+}
 
 
