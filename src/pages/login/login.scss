@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     background-color: $dark-purple;
+    position: relative;
 
     &__form {
         background-color: white;
@@ -16,6 +17,7 @@
         border-radius: 5px;
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 1.3rem;
         width: 25%;
     }
@@ -30,6 +32,7 @@
         justify-content: center;
         gap: 0.2rem;
         position: relative;
+        width: 100%;
     }
 
     &__label {
@@ -52,13 +55,39 @@
         }
     }
 
+    &__btn {
+        background-color: $dark-purple;
+        color: white;
+        align-self: center;
+        border: none;
+        padding: 0.6rem 0.8rem;
+        border-radius: 5px;
+        font-weight: 600;
+        font-family: $quicksand;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 
+    &__alert {
+        color: rgb(187, 0, 0);
+        text-align: center;
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 1300px) {
     .login {
         &__form {
             width: max-content;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .login {
+        &__form {
+            width: 90vw;
         }
     }
 }
