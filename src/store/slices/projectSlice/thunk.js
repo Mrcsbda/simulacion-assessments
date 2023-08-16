@@ -34,6 +34,7 @@ export const isLogin = (email, password) => {
 
 export const getUserByLocal = (id) => {
     return async (dispatch) => {
+        dispatch(checking())
         dispatch((IsAuthenticated(true)))
 
         try {
@@ -53,9 +54,11 @@ export const getUserByLocal = (id) => {
             }
 
             dispatch(getUser(user))
+            dispatch(isNotChecking())
 
         } catch (error) {
             dispatch((IsAuthenticated(false)))
+            dispatch(isNotChecking())
         }
 
     }

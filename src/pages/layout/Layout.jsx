@@ -4,6 +4,7 @@ import { updateProjects } from "../../store/slices/projectSlice/projectSlice"
 import ProjectTask from '../../components/projectTasks/main'
 import Tasks from '../../components/projects/task/Tasks'
 import "./Layout.scss"
+import Loader from '../../components/loader/Loader'
 
 
 const Layout = () => {
@@ -34,32 +35,40 @@ const Layout = () => {
   return (
     <>
       <main className="Layout__container">
-        <section>
-        </section>
+        {
+          isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <section>
+              </section>
 
-        <section className="Layout__container__manager">
-          <h1 className="Layout__title" >{`Gestor de proyectos de ${userInfo.name}`}</h1>
-          {
-            <ul className="Layout__projects">
-              {projects.map((project) => (
-                <li key={project.id} className="Layout__projects__project">
-                  <div>
-                    <input type="checkbox" checked={project.completed} />
-                    <h2>{project.title}</h2>
+              <section className="Layout__container__manager">
+                <h1 className="Layout__title" >{`Gestor de proyectos de ${userInfo.name}`}</h1>
+                {
+                  <ul className="Layout__projects">
+                    {projects.map((project) => (
+                      <li key={project.id} className="Layout__projects__project">
+                        <div>
+                          <input type="checkbox" checked={project.completed} onChange={()=> {}}/>
+                          <h2>{project.title}</h2>
 
-                    {
-                      openProject[project.id] ?
-                        <figure className='arrow_down' onClick={()=>handleCloseProjects(project.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
-                        :
-                        <figure className='arrow_down' onClick={()=>handleOpenProjects(project.id)}><img src="/images/arrow_down.svg" alt="arrowDown" /></figure>}
-                  </div>
-                  {openProject[project.id] &&
-                    <Tasks tasks={project.tasks} />}
-                </li>
-              ))}
-            </ul>
-          }
-        </section>
+                          {
+                            openProject[project.id] ?
+                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
+                              :
+                              <figure className='arrow_down' onClick={() => handleOpenProjects(project.id)}><img src="/images/arrow_down.svg" alt="arrowDown" /></figure>}
+                        </div>
+                        {openProject[project.id] &&
+                          <Tasks tasks={project.tasks} />}
+                      </li>
+                    ))}
+                  </ul>
+                }
+              </section>
+            </>
+          )
+        }
       </main>
     </>
   )

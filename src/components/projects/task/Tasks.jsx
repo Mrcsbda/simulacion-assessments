@@ -7,9 +7,9 @@ const Tasks = ({tasks}) => {
       <ul className="Layout__projects__tasks">
         {tasks.map((task)=>(
             <li key={task.id} className="Layout__projects__task">
-              <input type="checkbox" checked={task.completed} />
-              <span>{task.title}</span>  
-              
+              <input type="checkbox" checked={task.completed} onChange={()=> {}}/>
+              <span>{task.title}</span>
+
             </li>
         ))}
       </ul>
