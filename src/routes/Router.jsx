@@ -17,7 +17,7 @@ const Router = () => {
                         <Route path="login" element={<Login />} />
                     </Route>
                     <Route element={<PrivateRouter isAuthenticated={userIsAuthenticated} />}>
-                        <Route index element={<Layout />} />
+                        <Route path='/' element={<Layout />} />
                     </Route>
                 </Route>
             </Routes>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import "./login.scss"
@@ -7,16 +7,15 @@ import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/loader/Loader'
 
 const Login = () => {
-    const { isLoading } = useSelector(state => state.projects)
+    const { isLoading, userInfo } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onSubmit = (data) => {
-        console.log(data)
-        dispatch(isLogin(data.email, data.password))
-        navigate("/")
-    }
+    const onSubmit = async (data) => {
+       dispatch(isLogin(data.email, data.password));
+       navigate("/");
+    };
 
     return (
         <main className='login'>

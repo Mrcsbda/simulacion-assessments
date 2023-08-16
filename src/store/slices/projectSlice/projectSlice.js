@@ -4,8 +4,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     isLoading: false,
     userIsAuthenticated: false,
-    userInfo: null,
-    projects: null
+    userInfo: {},
+    projects: []
 }
 
 export const projectSlice = createSlice({
@@ -14,6 +14,9 @@ export const projectSlice = createSlice({
     reducers: {
         checking: (state) => {
             state.isLoading = true
+        },
+        isNotchecking: (state) => {
+            state.isLoading = false
         },
         login: (state, action) => {
             state.isLoading = false,
@@ -30,4 +33,4 @@ export const projectSlice = createSlice({
     }
 })
 
-export const { checking, login, logout, updateProjects } = projectSlice.actions
+export const { checking, isNotchecking, login, logout, updateProjects } = projectSlice.actions
