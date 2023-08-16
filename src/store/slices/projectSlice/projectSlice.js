@@ -15,7 +15,7 @@ export const projectSlice = createSlice({
         checking: (state) => {
             state.isLoading = true
         },
-        isNotchecking: (state) => {
+        isNotChecking: (state) => {
             state.isLoading = false
         },
         login: (state, action) => {
@@ -33,4 +33,4 @@ export const projectSlice = createSlice({
     }
 })
 
-export const { checking, isNotchecking, login, logout, updateProjects } = projectSlice.actions
+export const { checking, isNotChecking , login, logout, updateProjects } = projectSlice.actions

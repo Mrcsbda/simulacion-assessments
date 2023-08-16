@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProjects } from "../../store/slices/projectSlice/projectSlice"
+import ProjectTask from '../../components/projectTasks/main'
 
 const Layout = () => {
 
@@ -18,7 +19,8 @@ const Layout = () => {
             <ul>
               {projects.map((project) => (
                 <li key={project.id}>
-                  {project.title}
+                  <h2>{project.title} </h2>
+                  <ProjectTask/>
                 </li>
               ))}
             </ul>

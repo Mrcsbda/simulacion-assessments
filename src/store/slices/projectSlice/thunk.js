@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom"
 import { projectsApi } from "../../../api/projectsApi"
-import { checking, isNotchecking, login } from "./projectSlice"
+import { checking, isNotChecking, login } from "./projectSlice"
 
 export const isLogin = (email, password) => {
 
@@ -18,23 +17,15 @@ export const isLogin = (email, password) => {
                 project.usersId.includes(userInfo.id)
             ))
 
-                console.log(projects);
-
-            if (userInfo) {
-                const user = {
-                    userInfo,
-                    projects
-                }
-                dispatch(login(user))
-            } else {
-                dispatch(isNotchecking())
+            const user = {
+                userInfo,
+                projects
             }
+            dispatch(login(user))
 
         } catch (error) {
-
+            dispatch(isNotChecking())
         }
-
-
 
     }
 }
