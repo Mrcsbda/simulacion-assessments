@@ -48,8 +48,7 @@ const Layout = () => {
                   <figure className="Layout__icons-container">
                     <img className="Layout__icons" src="/images/add-project.svg" alt="" />
                     <img className="Layout__icons" src="/images/add-user.svg" alt="" />
-                    <img className="Layout__icons" src="/images/edit.svg" alt="" />
-                    <img className="Layout__icons" src="/images/delete.svg" alt="" />
+
                   </figure>
                 </div>
                 {
@@ -60,6 +59,8 @@ const Layout = () => {
                           <input type="checkbox" checked={project.completed} onChange={() => { }} />
                           <h2>{project.title}</h2>
                           <img className="Layout__icons-task" src="/images/add-project.svg" alt="" />
+                          <img className="Layout__icons-task" src="/images/edit.svg" alt="" />
+                          <img className="Layout__icons-task" src="/images/delete.svg" alt="" />
 
 
                           {
