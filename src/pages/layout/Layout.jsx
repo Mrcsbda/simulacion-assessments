@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProjects } from "../../store/slices/projectSlice/projectSlice"
 import Tasks from '../../components/projects/task/Tasks'
@@ -21,9 +21,10 @@ const Layout = () => {
   const [deleteProject, setDeleteProject] = useState(false)
   const [projectId, setProjectId] = useState("")
 
-  const handleUpdateProject = () => {
-    dispatch(updateProjects())
-  }
+  useEffect(() => {
+    console.log(openProject);
+  }, [openProject])
+  
   const handleOpenProjects = (projectId) => {
     setOpenProject((prevOpenProject) => ({
       ...prevOpenProject,
@@ -34,7 +35,9 @@ const Layout = () => {
     setOpenProject((prevOpenProject) => ({
       ...prevOpenProject,
       [projectId]: false,
-    }));
+    }
+    ));
+    console.log(projectId);
   };
   const handleEditProject = async (project, userId)=> {
    const newProject = await editProject(project)
@@ -88,12 +91,14 @@ const Layout = () => {
 
                           {
                             openProject[project.id] ?
-                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id, userInfo.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
+                              <figure className='arrow_down' onClick={() => handleCloseProjects(project.id)}><img src="/images/arrow-up.svg" alt="arrowDown" /></figure>
                               :
                               <figure className='arrow_down' onClick={() => handleOpenProjects(project.id)}><img src="/images/arrow_down.svg" alt="arrowDown" /></figure>}
                         </div>
-                        {openProject[project.id] &&
-                          <Tasks tasks={project.tasks} project={project} projectId={project.id} userId={userInfo.id}/>}
+                        {
+                        openProject[project.id] &&
+                          <Tasks tasks={project.tasks} project={project} projectId={project.id} userId={userInfo.id}/>
+                          }
                       </li>
                     ))}
                   </ul>

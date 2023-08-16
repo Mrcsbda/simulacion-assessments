@@ -5,7 +5,7 @@ import { editTask } from '../../SwalsEdit/editProject'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTaskThunk } from '../../../store/slices/projectSlice/thunkJose'
 
-const Tasks = ({ tasks, projectId }) => {
+const Tasks = ({ tasks, project, projectId, userId }) => {
   const [tasksArray, setTasksArray] = useState(false)
   const [repeatProcess, setRepeatProcess] = useState(false)
 
@@ -52,8 +52,7 @@ const Tasks = ({ tasks, projectId }) => {
   }
 
 
-const Tasks = ({ tasks, project, userId }) => {
-  const dispatch = useDispatch()
+
   const handleEditTask = async (task)=> {
     const newTask = await editTask(task)
     const newTasks = tasks.map(task =>
@@ -97,6 +96,6 @@ const Tasks = ({ tasks, project, userId }) => {
     </ul>
   )
 }
-}
+
 
 export default Tasks
