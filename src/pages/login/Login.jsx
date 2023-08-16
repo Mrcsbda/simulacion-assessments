@@ -8,7 +8,7 @@ import Loader from '../../components/loader/Loader'
 
 const Login = () => {
     const { isLoading, userInfo } = useSelector(state => state.projects)
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [rightInformation, setRightInformation] = useState(true)
@@ -21,6 +21,7 @@ const Login = () => {
         } else {
             setRightInformation(false)
         }
+        reset()
     };
 
     return (
