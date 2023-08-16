@@ -1,5 +1,5 @@
 import { projectsApi } from "../../../api/projectsApi"
-import { checking, isNotChecking, login } from "./projectSlice"
+import { IsAuthenticated, checking, getUser, isNotChecking, login } from "./projectSlice"
 
 export const isLogin = (email, password) => {
 
@@ -21,10 +21,41 @@ export const isLogin = (email, password) => {
                 userInfo,
                 projects
             }
+
+            localStorage.setItem('userId', userInfo.id)
             dispatch(login(user))
 
         } catch (error) {
             dispatch(isNotChecking())
+        }
+
+    }
+}
+
+export const getUserByLocal = (id) => {
+    return async (dispatch) => {
+        dispatch((IsAuthenticated(true)))
+
+        try {
+            const userData = await projectsApi.get(`users?id=${id}`)
+            const [userInfo] = userData.data
+
+            const projectsData = await projectsApi.get(`Projects`)
+            const projectsInfo = projectsData.data
+
+            const projects = projectsInfo.filter((project) => (
+                project.usersId.includes(userInfo.id)
+            ))
+
+            const user = {
+                userInfo,
+                projects
+            }
+
+            dispatch(getUser(user))
+
+        } catch (error) {
+            dispatch((IsAuthenticated(false)))
         }
 
     }
