@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
-
+import { editTask } from '../../SwalsEdit/editProject'
+import { patchProject } from '../../../store/slices/projectSlice/thunkSebastian'
+import { useDispatch } from 'react-redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTaskThunk } from '../../../store/slices/projectSlice/thunkJose'
 
@@ -50,9 +52,7 @@ const Tasks = ({ tasks, projectId }) => {
       }
     })
   }
-import { editTask } from '../../SwalsEdit/editProject'
-import { patchProject } from '../../../store/slices/projectSlice/thunkSebastian'
-import { useDispatch } from 'react-redux'
+
 
 const Tasks = ({ tasks, project, userId }) => {
   const dispatch = useDispatch()
@@ -98,6 +98,7 @@ const Tasks = ({ tasks, project, userId }) => {
       ))}
     </ul>
   )
+}
 }
 
 export default Tasks
