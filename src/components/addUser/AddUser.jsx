@@ -12,12 +12,14 @@ const AddUser = ({ setNewUser, projectId }) => {
     const dispatch = useDispatch()
 
     const onSubmit = async (data) => {
-        await dispatch(addUser(data.email)).then(() => {
+        const validation = await dispatch(addUser(data.email))
+        if(validation) {
             setRightInformation(true)
             setNewUser(false)
-        }).catch(() => {
+        } else {
             setRightInformation(false)
-        })
+        }
+
         reset()
     }
 

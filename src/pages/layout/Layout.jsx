@@ -104,7 +104,7 @@ const Layout = () => {
                 )
               }
               {deleteProject && (
-                <DeleteProject setDeleteProject={setDeleteProject} />
+                <DeleteProject setDeleteProject={setDeleteProject} projectId={projectId}/>
               )}
             </>
           )

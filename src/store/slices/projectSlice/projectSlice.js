@@ -36,8 +36,12 @@ export const projectSlice = createSlice({
         getUser: (state, action) => {
             state.userInfo = action.payload.userInfo,
             state.projects = action.payload.projects
+        },
+        deleteProject: (state, action) => {
+            state.projects = state.projects.filter(project => project.id !== action.payload)
         }
+
     }
 })
 
-export const { checking, isNotChecking, login, logout, updateProjects , getUser , IsAuthenticated } = projectSlice.actions
+export const { checking, isNotChecking, login, logout, updateProjects , getUser , IsAuthenticated , deleteProject} = projectSlice.actions
