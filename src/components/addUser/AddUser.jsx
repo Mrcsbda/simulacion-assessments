@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import "./addUser.scss"
 
-const AddUser = () => {
+const AddUser = ({ setNewUser }) => {
 
     const { isLoading, userInfo } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -14,9 +14,14 @@ const AddUser = () => {
 
     }
 
-  return (
-    <section className='add-user'>
-        <form className='login__form' onSubmit={handleSubmit(onSubmit)}>
+    const closeModal = () => {
+        setNewUser(false)
+    }
+
+    return (
+        <section className='add-user'>
+            <form className='login__form' onSubmit={handleSubmit(onSubmit)}>
+                <img className='add-user__icon' src="/images/close.svg" alt="" onClick={closeModal}/>
                 <h1 className='login__title'>Agregar Usuario</h1>
                 <div className='login__input-container'>
                     <label htmlFor="email" className='login__label'>Correo del usuario</label>
@@ -38,8 +43,8 @@ const AddUser = () => {
                 }
             </form>
             {isLoading && <Loader />}
-    </section>
-  )
+        </section>
+    )
 }
 
 export default AddUser

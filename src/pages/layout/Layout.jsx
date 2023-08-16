@@ -81,7 +81,7 @@ const Layout = () => {
               </section>
               {
                 newUser && (
-                  <AddUser/>
+                  <AddUser setNewUser={setNewUser}/>
                 )
               }
             </>
