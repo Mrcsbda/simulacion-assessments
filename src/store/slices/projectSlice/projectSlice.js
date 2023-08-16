@@ -39,8 +39,18 @@ export const projectSlice = createSlice({
     },
     deleteTask: (state, action) => {
       state.projects = action.payload.projects
+    },
+    deleteProject: (state, action) => {
+      state.projects = state.projects.filter(project => project.id !== action.payload)
+    },
+    addUser: (state, action) => {
+      const findProject = state.projects.findIndex(project => project.id === action.payload.projectId)
+      console.log(state.projects[findProject].usersId)
+      state.projects[findProject].usersId = [...state.projects[findProject].usersId, action.payload.userId];
     }
+
   }
+
 })
 
-export const { checking, isNotChecking, login, logout, updateProjects, getUser, IsAuthenticated, deleteTask } = projectSlice.actions
+export const { checking, isNotChecking, login, logout, updateProjects, getUser, IsAuthenticated, deleteTask, deleteProject, addUser } = projectSlice.actions

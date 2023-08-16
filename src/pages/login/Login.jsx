@@ -58,7 +58,6 @@ const Login = () => {
                 }
             </form>
             {isLoading && <Loader />}
-
         </main>
     )
 }
