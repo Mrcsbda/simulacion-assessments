@@ -5,6 +5,7 @@ import Tasks from '../../components/projects/task/Tasks'
 import "./Layout.scss"
 import Loader from '../../components/loader/Loader'
 import AddUser from '../../components/addUser/AddUser'
+import AddProject from '../../components/addProject/AddProject'
 
 
 const Layout = () => {
@@ -13,6 +14,7 @@ const Layout = () => {
   const { isLoading, userInfo, projects } = useSelector(state => state.projects)
   const [openProject, setOpenProject] = useState({})
   const [newUser, setNewUser] = useState(false)
+  const [newProject, setNewProject] = useState(false)
   const [projectId, setProjectId] = useState("")
 
   const handleUpdateProject = () => {
@@ -36,6 +38,10 @@ const Layout = () => {
     setProjectId(id)
   }
 
+  const addNewProject = () => {
+    setNewProject(true)
+  }
+
   return (
     <>
       <main className="Layout__container">
@@ -51,7 +57,7 @@ const Layout = () => {
                 <div className="Layout__container__top">
                   <h1 className="Layout__title" >{`Gestor de proyectos de ${userInfo.name}`}</h1>
                   <figure className="Layout__icons-container">
-                    <img className="Layout__icons" src="/images/add-project.svg" alt="" />
+                    <img className="Layout__icons" src="/images/add-project.svg" alt="" onClick={()=> addNewProject()}/>
                   </figure>
                 </div>
                 {
@@ -83,6 +89,11 @@ const Layout = () => {
               {
                 newUser && (
                   <AddUser setNewUser={setNewUser} projectId={projectId}/>
+                )
+              }
+              {
+                newProject && (
+                  <AddProject setNewProject={setNewProject}/>
                 )
               }
             </>

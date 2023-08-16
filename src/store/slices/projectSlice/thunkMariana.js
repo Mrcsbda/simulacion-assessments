@@ -1,11 +1,11 @@
 import { projectsApi } from "../../../api/projectsApi"
+import { checking, isNotChecking } from "./projectSlice"
 
 export const addUser = (email) => {
     return async (dispatch) => {
-        dispatch(checking())
-
         try {
-            const userData = await projectsApi.get(`users?email=${id}`)
+            console.log(email)
+            const userData = await projectsApi.get(`users?email=${email}`)
             const [userInfo] = userData.data
 
             // const projectsData = await projectsApi.get(`Projects`)
@@ -20,11 +20,8 @@ export const addUser = (email) => {
             //     projects
             // }
 
-            dispatch(getUser(user))
-            dispatch(isNotChecking())
-
         } catch (error) {
-            dispatch(isNotChecking())
+            return null
         }
 
     }

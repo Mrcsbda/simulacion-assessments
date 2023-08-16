@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import "./addUser.scss"
+import { addUser } from '../../store/slices/projectSlice/thunkMariana'
 
-const AddUser = ({ setNewUser , projectId }) => {
+const AddUser = ({ setNewUser, projectId }) => {
 
     const { isLoading, userInfo } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -11,7 +12,13 @@ const AddUser = ({ setNewUser , projectId }) => {
     const dispatch = useDispatch()
 
     const onSubmit = async (data) => {
-        console.log(projectId)
+        await dispatch(addUser(data.email)).then(() => {
+            setRightInformation(true)
+            setNewUser(false)
+        }).catch(() => {
+            setRightInformation(false)
+        })
+        reset()
     }
 
     const closeModal = () => {
@@ -21,7 +28,7 @@ const AddUser = ({ setNewUser , projectId }) => {
     return (
         <section className='add-user'>
             <form className='login__form' onSubmit={handleSubmit(onSubmit)}>
-                <img className='add-user__icon' src="/images/close.svg" alt="" onClick={closeModal}/>
+                <img className='add-user__icon' src="/images/close.svg" alt="" onClick={closeModal} />
                 <h1 className='login__title'>Agregar Usuario</h1>
                 <div className='login__input-container'>
                     <label htmlFor="email" className='login__label'>Correo del usuario</label>
@@ -42,7 +49,6 @@ const AddUser = ({ setNewUser , projectId }) => {
                     )
                 }
             </form>
-            {isLoading && <Loader />}
         </section>
     )
 }
