@@ -63,7 +63,6 @@
         padding: 0.6rem 0.8rem;
         border-radius: 5px;
         font-weight: 600;
-        font-family: $quicksand;
         &:hover {
             cursor: pointer;
         }
@@ -73,6 +72,7 @@
         color: rgb(187, 0, 0);
         text-align: center;
         width: 80%;
+        font-size: 14px;
     }
 }
 
