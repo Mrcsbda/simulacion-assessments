@@ -4,7 +4,7 @@ import { checking, login } from "./projectSlice"
 export const isLogin = (email, password) => {
     return async (dispatch) => {
         dispatch(checking())
-        // users?email=${email}&password=${password}
+
         const userData = await projectsApi.get(`users?email=${email}&password=${password}`)
         const userInfo = userData.data
 
@@ -20,6 +20,6 @@ export const isLogin = (email, password) => {
         }
 
         dispatch(login(user))
-        //
+        
     }
 }

@@ -3,14 +3,19 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import "./login.scss"
 import { isLogin } from '../../store/slices/projectSlice/thunk'
+import { useNavigate } from 'react-router-dom'
+import Loader from '../../components/loader/Loader'
 
 const Login = () => {
     const { isLoading } = useSelector(state => state.projects)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const onSubmit = (data) => {
-        // dispatch(isLogin(data.email, data.password))
+        console.log(data)
+        dispatch(isLogin(data.email, data.password))
+        navigate("/")
     }
 
     return (
@@ -30,7 +35,7 @@ const Login = () => {
                             type="email"
                             placeholder='Escribe tu Correo Electrónico'
                             className='login__input'
-                            {...register("password", { required: true })}
+                            {...register("email", { required: true })}
                         />
                     </div>
                     <div className='login__input-container'>
@@ -43,7 +48,7 @@ const Login = () => {
                             {...register("password", { required: true })}
                         />
                     </div>
-                    <button type='submit'></button>
+                    <button type='submit'>Enviar</button>
                 </form>
 
             }
