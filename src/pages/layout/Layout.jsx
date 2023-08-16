@@ -4,6 +4,7 @@ import { updateProjects } from "../../store/slices/projectSlice/projectSlice"
 import Tasks from '../../components/projects/task/Tasks'
 import "./Layout.scss"
 import Loader from '../../components/loader/Loader'
+import AddUser from '../../components/addUser/AddUser'
 
 
 const Layout = () => {
@@ -11,6 +12,7 @@ const Layout = () => {
   const dispatch = useDispatch()
   const { isLoading, userInfo, projects } = useSelector(state => state.projects)
   const [openProject, setOpenProject] = useState({})
+  const [newUser, setNewUser] = useState(false)
 
   const handleUpdateProject = () => {
     dispatch(updateProjects())
@@ -28,8 +30,9 @@ const Layout = () => {
     }));
   };
 
-
-
+  const addNewUser = () => {
+    setNewUser(true)
+  }
 
   return (
     <>
@@ -47,7 +50,7 @@ const Layout = () => {
                   <h1 className="Layout__title" >{`Gestor de proyectos de ${userInfo.name}`}</h1>
                   <figure className="Layout__icons-container">
                     <img className="Layout__icons" src="/images/add-project.svg" alt="" />
-                    <img className="Layout__icons" src="/images/add-user.svg" alt="" />
+                    <img className="Layout__icons" src="/images/add-user.svg" alt="" onClick={addNewUser}/>
 
                   </figure>
                 </div>
@@ -76,6 +79,11 @@ const Layout = () => {
                   </ul>
                 }
               </section>
+              {
+                newUser && (
+                  <AddUser/>
+                )
+              }
             </>
           )
         }
