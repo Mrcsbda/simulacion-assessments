@@ -18,6 +18,9 @@ export const projectSlice = createSlice({
         isNotChecking: (state) => {
             state.isLoading = false
         },
+        IsAuthenticated: (state, action) => {
+            state.userIsAuthenticated = action.payload;
+        },
         login: (state, action) => {
             state.isLoading = false,
             state.userIsAuthenticated = true,
@@ -29,8 +32,12 @@ export const projectSlice = createSlice({
         },
         updateProjects: (state, action) => {
             state.projects = action.payload.projects
+        },
+        getUser: (state, action) => {
+            state.userInfo = action.payload.userInfo,
+            state.projects = action.payload.projects
         }
     }
 })
 
-export const { checking, isNotChecking , login, logout, updateProjects } = projectSlice.actions
+export const { checking, isNotChecking, login, logout, updateProjects , getUser , IsAuthenticated } = projectSlice.actions
