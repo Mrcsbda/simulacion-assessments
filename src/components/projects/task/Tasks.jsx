@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { Checkbox, CheckboxGroup, keyframes } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
 import { editTask } from '../../SwalsEdit/editProject'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,9 +22,7 @@ const Tasks = ({ tasks, project, projectId, userId }) => {
     }
   }, [repeatProcess])
 
-  const editTask = () => {
-
-  }
+  
 
   const deleteTask = (taskContent) => {
     console.log(taskContent)
