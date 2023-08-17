@@ -12,7 +12,7 @@ export const patchProject = (projectId, newProject, userId) => {
             const projectsInfo = projectsData.data
 
             const projects = projectsInfo.filter((project) => (
-                project.usersId.includes(userId)
+                project.users.includes(userId)
             ))
 
             dispatch(updateProjects({projects}))

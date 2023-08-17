@@ -46,8 +46,8 @@ export const projectSlice = createSlice({
     },
     addUser: (state, action) => {
       const findProject = state.projects.findIndex(project => project.id === action.payload.projectId)
-      console.log(state.projects[findProject].usersId)
-      state.projects[findProject].usersId = [...state.projects[findProject].usersId, action.payload.userId];
+      console.log(state.projects[findProject].users)
+      state.projects[findProject].users = [...state.projects[findProject].users, action.payload.userId];
     }
 
   }

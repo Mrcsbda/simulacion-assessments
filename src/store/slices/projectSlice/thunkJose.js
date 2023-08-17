@@ -14,7 +14,7 @@ export const deleteTaskThunk = (projectId, newArray) => {
         const projectsInfo = projectsData.data
 
         const projects = projectsInfo.filter((project) => (
-          project.usersId.includes(userInfo.id)
+          project.users.includes(userInfo.id)
         ))
         dispatch(deleteTask(projects))
       }

@@ -9,19 +9,19 @@ export const isLogin = (email, password) => {
         try {
             const userData = await projectsApi.get(`users?email=${email}&password=${password}`)
             const [userInfo] = userData.data
-
+            
             const projectsData = await projectsApi.get(`Projects`)
             const projectsInfo = projectsData.data
 
             const projects = projectsInfo.filter((project) => (
-                project.usersId.includes(userInfo.id)
+                project.users.includes(userInfo.id)
             ))
 
             const user = {
                 userInfo,
                 projects
             }
-
+            console.log(user);
             localStorage.setItem('userId', userInfo.id)
             dispatch(login(user))
 
@@ -45,7 +45,7 @@ export const getUserByLocal = (id) => {
             const projectsInfo = projectsData.data
 
             const projects = projectsInfo.filter((project) => (
-                project.usersId.includes(userInfo.id)
+                project.users.includes(userInfo.id)
             ))
 
             const user = {

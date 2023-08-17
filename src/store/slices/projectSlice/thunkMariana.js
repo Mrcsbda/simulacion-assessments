@@ -14,11 +14,11 @@ export const addUserThunk = (email, projectId, projects) => {
 
             const findProject = projects.findIndex(project => project.id == projectId)
 
-            const usersId = [...projects[findProject].usersId, userInfo.id]
-            console.log(usersId)
+            const users = [...projects[findProject].users, userInfo.id]
+            console.log(users)
 
             await projectsApi.patch(`projects/${projectId}`, {
-                usersId: usersId
+                users: users
             })
             dispatch(addUser(info))
 

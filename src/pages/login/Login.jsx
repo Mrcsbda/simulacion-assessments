@@ -15,6 +15,7 @@ const Login = () => {
 
     const onSubmit = async (data) => {
         await dispatch(isLogin(data.email, data.password));
+       
         if (userInfo?.id) {
             navigate("/");
             setRightInformation(true)
